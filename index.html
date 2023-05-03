@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>棘刺</title>
+    <style>
+        body {
+            background-color: black;
+        }
+
+        .head {
+            width: 100%;
+            height: 40px;
+            background-color: rgb(211, 186, 45);
+        }
+
+        .head ul {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .head ul li {
+            /* 行高与盒子高相同时，垂直居中（仅限行） */
+            float: left;
+            padding: 0 30px;
+            list-style: none;
+            height: 40px;
+            float: left;
+        }
+
+        .head a {
+            color: white;
+            display: block;
+            text-decoration: none;
+        }
+
+        .head ul li:hover {
+            background-color: rgb(211, 186, 45);
+            opacity: .6;
+        }
+
+        .main {
+            display: table-cell;
+            position: relative;
+            height: 750px;
+            width: 1100px;
+            margin-top: 0px;
+            margin-left: 120px;
+            position: absolute;
+            background: url(./图片/棘刺.jpg) no-repeat;
+            background-size: 1100px 700px;
+            background-position: 0px 50px;
+        }
+
+        .main ul {
+            z-index: 2;
+            background-color: gray;
+            opacity: .8;
+            width: 240px;
+            height: 50px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .main ul li {
+            list-style: none;
+            display: inline;
+            float: left;
+            height: 50px;
+            line-height: 50px;
+            width: 120px;
+        }
+
+        .main li a {
+            font-size: large;
+            color: white;
+            text-decoration: none;
+        }
+
+        .main li:hover {
+            background-color: white;
+        }
+
+        .main a:hover {
+            color: gray;
+        }
+
+        .main .img {
+            position: absolute;
+            top: 50px;
+            left: 0px;
+            display: none;
+        }
+
+        .main .img:target {
+            display: block;
+        }
+
+        .tabhead {
+            text-align: center;
+            background-color: black;
+            color: white;
+            font-size: 20px;
+        }
+
+
+        .table {
+            display: table-cell;
+            float: left;
+            background-color: grey;
+            height: 300px;
+            width: 360px;
+            opacity: .9;
+            position: absolute;
+            left: 10px;
+            top: 420px;
+        }
+
+        .table table {
+            border-collapse: collapse;
+            width: 100%;
+            border: 1px solid white;
+        }
+
+        .table tr,
+        .table td {
+            border: 1px solid white;
+        }
+
+        .table td {
+            padding: 5px;
+            width: 10px;
+            height: 38px;
+        }
+
+        .table .color {
+            text-align: center;
+            background-color: black;
+            opacity: .8;
+            color: white;
+        }
+
+        .dangan {
+            display: table-cell;
+            float: left;
+            background-color: grey;
+            color: white;
+            position: absolute;
+            left: 780px;
+            top: 80px;
+            width: 300px;
+            height: 300px;
+            opacity: .9;
+        }
+
+        .lvli {
+            display: table-cell;
+            float: left;
+            background-color: grey;
+            color: white;
+            width: 300px;
+            height: 300px;
+            opacity: .9;
+            position: absolute;
+            left: 780px;
+            top: 410px;
+        }
+
+        .lvli p,
+        .dangan p {
+            margin: 0 auto;
+            padding: 5px;
+            font-size: 15px;
+        }
+
+        .lvli table,
+        .dangan table {
+            margin: 0 auto;
+            margin-top: 10px;
+            background-color: black;
+            opacity: .7;
+            border: none;
+            width: 95%;
+            font-size: 15px;
+            font-weight: 900;
+        }
+
+        .carousel {
+            width: 100%;
+            height: 300px;
+            background-color: rgb(114, 114, 114);
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        ul.slides {
+            position: relative;
+            width: 1000px;
+            height: 280px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        li.slide {
+            margin: 0;
+            padding: 0;
+            width: inherit;
+            height: inherit;
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: .5s transform ease-in-out;
+        }
+
+        .slide:nth-of-type(2) {
+            left: 100%;
+        }
+
+        .slide:nth-of-type(3) {
+            left: 200%;
+        }
+
+        .slide:nth-of-type(4) {
+            left: 300%;
+        }
+
+        input[type="radio"] {
+            position: relative;
+            z-index: 100;
+            display: none;
+        }
+
+        .controls-visible {
+            position: absolute;
+            width: 100%;
+            bottom: 12px;
+            text-align: center;
+        }
+
+        .controls-visible label {
+            display: inline-block;
+            width: 5px;
+            height: 5px;
+            background-color: white;
+            border-radius: 50%;
+            margin: 0 3px;
+            border: 2px solid white;
+        }
+
+        .slides input[type="radio"]:nth-of-type(1):checked~.controls-visible label:nth-of-type(1) {
+            background-color: black;
+        }
+
+        .slides input[type="radio"]:nth-of-type(2):checked~.controls-visible label:nth-of-type(2) {
+            background-color: black;
+
+        }
+
+        .slides input[type="radio"]:nth-of-type(3):checked~.controls-visible label:nth-of-type(3) {
+            background-color: black;
+        }
+
+        .slides input[type="radio"]:nth-of-type(4):checked~.controls-visible label:nth-of-type(4) {
+            background-color: black;
+        }
+
+        .slides input[type="radio"]:nth-of-type(1):checked~.slide {
+            transform: translatex(0%);
+        }
+
+        .slides input[type="radio"]:nth-of-type(2):checked~.slide {
+            transform: translatex(-100%);
+        }
+
+        .slides input[type="radio"]:nth-of-type(3):checked~.slide {
+            transform: translatex(-200%);
+        }
+
+        .slides input[type="radio"]:nth-of-type(4):checked~.slide {
+            transform: translatex(-300%);
+        }
+
+        .slide img {
+            max-width: 100%;
+            /* height: auto; */
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 导航栏 -->
+    <div class="head">
+        <ul>
+            <li><a href="https://ak.hypergryph.com/">官方网站</a></li>
+            <li><a href="https://prts.wiki/w/%E5%B9%B2%E5%91%98%E4%B8%80%E8%A7%88">干员一览</a></li>
+            <li><a
+                    href="https://wiki.biligame.com/arknights/%E5%B9%B2%E5%91%98%E5%AF%BB%E8%AE%BF%E6%A8%A1%E6%8B%9F%E5%99%A8">干员寻访模拟器</a>
+            </li>
+            <li><a href="https://space.bilibili.com/259571179">作业答案</a></li>
+            <li><a href="#">其它</a></li>
+        </ul>
+    </div>
+    <!-- 轮播图 -->
+    <div class="carousel">
+        <ul class="slides">
+            <input type="radio" id="control-1" name="control" checked>
+            <input type="radio" id="control-2" name="control">
+            <input type="radio" id="control-3" name="control">
+            <input type="radio" id="control-4" name="control">
+
+            <li class="slide"><a href="https://ak.hypergryph.com/special/ambience_synesthesia/index.html"><img
+                        src="./图片/叔叔.png" alt="" width="1000" height="280"></a></li>
+            <li class="slide"><a href="https://ak.hypergryph.com/special/ambience_synesthesia/index.html"><img
+                        src="./图片/象限解构者.jpg" alt="" width="1000" height="280"></a></li>
+            <li class="slide"><a href="https://ak.hypergryph.com/special/ambience_synesthesia/index.html"><img
+                        src="./图片/老鲤.png" alt="" width="1000" height="280"></a></li>
+            <li class="slide"><a href="https://ak.hypergryph.com/special/ambience_synesthesia/index.html"><img
+                        src="./图片/零号特工.jpg" alt="" width="1000" height="280"></a></li>
+
+            <div class="controls-visible">
+                <label for="control-1"></label>
+                <label for="control-2"></label>
+                <label for="control-3"></label>
+                <label for="control-4"></label>
+            </div>
+        </ul>
+    </div>
+    <!-- 介绍 -->
+    <div class="main">
+        <ul>
+            <li><a href="#立绘">立绘</a></li>
+            <li><a href="#惬意">惬意</a></li>
+        </ul>
+        <img src="./图片/棘刺.jpg" height="700px" width="1100px" title=我老婆好看吧; id="立绘" ; class="img">
+        <img src="./图片/惬意（棘刺）.png" height="700px" width="1100px" title=老婆，嘿嘿; id="惬意" ; class="img">
+        <div class="table">
+            <table>
+                <tr>
+                    <td class="color">职业</td>
+                    <td>近卫</td>
+                    <td class="color">星级</td>
+                    <td>6</td>
+                </tr>
+                <tr>
+                    <td class="color">阵营</td>
+                    <td>伊比利亚</td>
+                    <td class="color">性别</td>
+                    <td>男</td>
+                </tr>
+                <tr>
+                    <td class="color">画师</td>
+                    <td colspan="3">幻想黑兔</td>
+                </tr>
+                <tr>
+                    <td class="color">干员编号</td>
+                    <td colspan="3">II01</td>
+                </tr>
+                <tr>
+                    <td class="color">特性</td>
+                    <td colspan="3">可以进行远程攻击, 但此时攻击力降至80%</td>
+                </tr>
+                <tr>
+                    <td class="color">标签</td>
+                    <td colspan="3">近战位,输出,防护</td>
+                </tr>
+            </table>
+        </div>
+        <div class="dangan">
+            <table>
+                <tr>
+                    <td>基础档案</td>
+                </tr>
+            </table>
+            <p>【专精】药剂制作、剑术、神学</p>
+            <p>【战斗经验】五年</p>
+            <p>【出身地】伊比利亚</p>
+            <p>【种族】阿戈尔</p>
+            <p>【身高】177cm</p>
+            <p>【生日】3月17日</p>
+            <p>【矿石病感染情况】参照医学检测报告，确认为非感染者。</p>
+        </div>
+        <div class="lvli">
+            <table>
+                <tr>
+                    <td>客观履历</td>
+                </tr>
+            </table>
+            <p>精通剑术与药剂制作的罗德岛前线作战干员，棘刺。出身于伊比利亚腹地，于当地宗教局势动荡中离开家乡，在脱离伊比利亚地区后，受邀来到罗德岛。
+                以上关于伊比利亚境内局势的部分为棘刺自述，尚未完全经过考证</p>
+        </div>
+    </div>
+
+</body>
+
+</html>
